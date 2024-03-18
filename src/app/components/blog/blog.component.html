@@ -1,14 +1,37 @@
 <h1 class="alert alert-info">Latest Random Thoughts</h1>
-<ul class="list-group">
-    <li class="list-group-item" *ngFor="let post of POSTS">
-        <h5><i class="bi bi-substack"></i> {{post.title}}</h5>
-        <p>{{post.body}}</p>
-        <p>Posted: 
-            by {{post.username}}
-        </p>
-        <a href="/posts/details/{{post._id}}" class="btn btn-info float-end">
-            <i class="bi bi-book"></i> Read More
-        </a>
-    </li>
-</ul>
+<div class="row">
+    <section class="col-6">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let post of POSTS">
+                <h5><i class="bi bi-substack"></i> {{post.title}}</h5>
+                <p>{{post.body}}</p>
+                <p>Posted: 
+                    by {{post.username}}
+                </p>
+                <a href="/posts/details/{{post._id}}" class="btn btn-info float-end">
+                    <i class="bi bi-book"></i> Read More
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section class="col-6">
+        <form>
+            <fieldset>
+                <label for="title">Title: *</label>
+                <input name="title" id="title" required [(ngModel)]="title"/>
+            </fieldset>
+            <fieldset><label for="body">Body: *</label>
+                <textarea name="body" id="body" required [(ngModel)]="body"></textarea>
+            </fieldset>
+            <fieldset>
+                <label for="username">Username: *</label>
+                <input name="username" id="username" required [(ngModel)]="username" />
+            </fieldset>
+            <button class="btn btn-info offset-4" (click)="addPost();">
+                <i class="bi bi-plus-circle"></i> Save
+            </button>
+        </form>
+    </section>
+</div>
+
 

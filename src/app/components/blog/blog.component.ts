@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 // service for api calls
 import { BlogService } from '../../services/blog.service';
@@ -15,7 +17,7 @@ export class Post {
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, FormsModule],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.css'
 })
@@ -32,12 +34,40 @@ export class BlogComponent {
   //   { _id: 'jkl234', 'title': '4th Post', body: 'Adding to the end', username: 'aryan' }
   // ];
   POSTS: any;
+  _id: string | undefined;
+  title: string | undefined;
+  body: string | undefined;
+  username: string | undefined;
+  date: Date | undefined;
 
   // call api GET via service, wait for json response then populate POSTS var 
   getPosts(): void {
     this.service.getPosts().subscribe(response => {
       this.POSTS = response;
     })
+  }
+
+  addPost(): void {
+    
+    // create new post object from form vals
+    let post = {
+      title: this.title,
+      body: this.body,
+      username: this.username,
+      date: new Date()
+    };
+
+    // send new object to service to api....then refresh blog list
+    this.service.addPost(post).subscribe(response => {
+      this.getPosts();
+      this.resetForm();
+    });
+  }
+
+  resetForm(): void {
+    this.title = undefined;
+    this.body = undefined;
+    this.username = undefined;
   }
 
   // runs every time component instantiates
