@@ -47,20 +47,38 @@ export class BlogComponent {
     })
   }
 
-  addPost(): void {
-    // create new post object from form vals
-    let post = {
-      title: this.title,
-      body: this.body,
-      username: this.username,
-      date: new Date()
-    };
+  savePost(): void {
+    if (this._id == undefined) {
+       // INSERT - create new post object from form vals
+      let post = {
+        title: this.title,
+        body: this.body,
+        username: this.username,
+        date: new Date()
+      };
 
-    // send new object to service to api....then refresh blog list
-    this.service.addPost(post).subscribe(response => {
-      this.getPosts();
-      this.resetForm();
-    });
+      // send new object to service to api....then refresh blog list
+      this.service.addPost(post).subscribe(response => {
+        this.getPosts();
+        this.resetForm();
+      });
+    }
+    else {
+      // UPDATE
+      let post = {
+        _id: this._id,
+        title: this.title,
+        body: this.body,
+        username: this.username,
+        date: new Date()
+      };
+
+      // send modified object to service to api....then refresh blog list
+      this.service.updatePost(post).subscribe(response => {
+        this.getPosts();
+        this.resetForm();
+      });
+    }
   }
 
   selectPost(post: Post): void {

@@ -27,7 +27,7 @@
                 <label for="username">Username: *</label>
                 <input name="username" id="username" required [(ngModel)]="username" />
             </fieldset>
-            <button class="btn btn-info offset-4" (click)="addPost();">
+            <button class="btn btn-info offset-4" (click)="savePost();">
                 <i class="bi bi-plus-circle"></i> Save
             </button>
             <button class="btn btn-info m-2" (click)="deletePost();" *ngIf="_id">

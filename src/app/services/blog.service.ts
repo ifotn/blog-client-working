@@ -18,7 +18,7 @@ export class BlogService {
     return this.http.get(`${this.serverUrl}/api/posts`);
   }
 
-  // POST
+  // CREATE using POST
   addPost(post: any) {
     return this.http.post(`${this.serverUrl}/api/posts`, post);
   }
@@ -26,6 +26,11 @@ export class BlogService {
   // DELETE
   deletePost(_id: string) {
     return this.http.delete(`${this.serverUrl}/api/posts/${_id}`);
+  }
+
+  // UPDATE using PUT
+  updatePost(post: any) {
+    return this.http.put(`${this.serverUrl}/api/posts/${post._id}`, post);
   }
 
 }
