@@ -23,4 +23,9 @@ export class BlogService {
     return this.http.post(`${this.serverUrl}/api/posts`, post);
   }
 
+  // DELETE
+  deletePost(_id: string) {
+    return this.http.delete(`${this.serverUrl}/api/posts/${_id}`);
+  }
+
 }

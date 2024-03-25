@@ -8,8 +8,8 @@
                 <p>Posted: 
                     by {{post.username}}
                 </p>
-                <a href="/posts/details/{{post._id}}" class="btn btn-info float-end">
-                    <i class="bi bi-book"></i> Read More
+                <a class="btn btn-info float-end" (click)="selectPost(post)">
+                    <i class="bi bi-book"></i> Select
                 </a>
             </li>
         </ul>
@@ -30,6 +30,13 @@
             <button class="btn btn-info offset-4" (click)="addPost();">
                 <i class="bi bi-plus-circle"></i> Save
             </button>
+            <button class="btn btn-info m-2" (click)="deletePost();" *ngIf="_id">
+                Delete
+            </button>
+            <button class="btn btn-info m-2" (click)="resetForm();">
+                Reset
+            </button>
+            <input name="_id" id="_id" type="hidden" [(ngModel)]="_id" />
         </form>
     </section>
 </div>
