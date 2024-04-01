@@ -1,4 +1,4 @@
 export const environment = {
-    production: false,
-    serverUrl: 'http://localhost:3000/v1'
+    production: true,
+    serverUrl: 'https://comp2106-blog-full-stack-w24.onrender.com/v1'
 }

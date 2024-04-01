@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.development';
 
 // services are "Injectable": can be provided as runtime dependency to other files (components)
 @Injectable({
