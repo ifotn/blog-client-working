@@ -1,0 +1,28 @@
+<section class="container">
+  <h1>Register</h1>
+  <fieldset>
+    <label for="username">Username:</label>
+    <input name="username" id="username" required [(ngModel)]="username" />
+  </fieldset>
+  <fieldset>
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      required
+      [(ngModel)]="password"
+    />
+  </fieldset>
+  <fieldset>
+    <label for="confirm">Confirm Password:</label>
+    <input
+      type="password"
+      name="confirm"
+      id="confirm"
+      required
+      (click)="register()"
+    />
+  </fieldset>
+  <button class="btn btn-info offset-2"><i class="bi bi-person-add"></i> Register</button>
+</section>

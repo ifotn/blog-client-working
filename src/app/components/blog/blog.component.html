@@ -1,4 +1,4 @@
-<h1 class="alert alert-info">Latest Random Thoughts</h1>
+<h1>Latest Random Thoughts</h1>
 <div class="row">
     <section class="col-6">
         <ul class="list-group">
@@ -8,14 +8,16 @@
                 <p>Posted: 
                     by {{post.username}}
                 </p>
-                <a class="btn btn-info float-end" (click)="selectPost(post)">
+                <a class="btn btn-info float-end" (click)="selectPost(post)"
+                    *ngIf="post.username==currentUser">
                     <i class="bi bi-book"></i> Select
                 </a>
             </li>
         </ul>
     </section>
-    <section class="col-6">
+    <section class="col-6" *ngIf="currentUser">
         <form>
+            <p class="alert alert-danger" *ngIf="message">{{message}}</p>
             <fieldset>
                 <label for="title">Title: *</label>
                 <input name="title" id="title" required [(ngModel)]="title"/>
@@ -23,20 +25,20 @@
             <fieldset><label for="body">Body: *</label>
                 <textarea name="body" id="body" required [(ngModel)]="body"></textarea>
             </fieldset>
-            <fieldset>
+            <!--<fieldset>
                 <label for="username">Username: *</label>
-                <input name="username" id="username" required [(ngModel)]="username" />
-            </fieldset>
-            <button class="btn btn-info offset-4" (click)="savePost();">
-                <i class="bi bi-plus-circle"></i> Save
-            </button>
-            <button class="btn btn-info m-2" (click)="deletePost();" *ngIf="_id">
-                Delete
-            </button>
-            <button class="btn btn-info m-2" (click)="resetForm();">
-                Reset
-            </button>
+            </fieldset> -->
+                <button class="btn btn-info offset-4" (click)="savePost();">
+                    <i class="bi bi-plus-circle"></i> Save
+                </button>
+                <button class="btn btn-info m-2" (click)="deletePost();" *ngIf="_id">
+                    <i class="bi bi-trash"></i> Delete
+                </button>
+                <button class="btn btn-info m-2" (click)="resetForm();">
+                    <i class="bi bi-x-circle"></i> Reset
+                </button> 
             <input name="_id" id="_id" type="hidden" [(ngModel)]="_id" />
+            <input name="username" id="username" required [(ngModel)]="username" type="hidden" />
         </form>
     </section>
 </div>

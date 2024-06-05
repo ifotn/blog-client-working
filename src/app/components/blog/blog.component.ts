@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 // service for api calls
 import { BlogService } from '../../services/blog.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 // define a Post class to structure the data
 export class Post {
@@ -39,6 +40,8 @@ export class BlogComponent {
   body: string | undefined;
   username: string | undefined;
   date: Date | undefined;
+  message: string | undefined;
+  currentUser: string | undefined;
 
   // call api GET via service, wait for json response then populate POSTS var 
   getPosts(): void {
@@ -58,9 +61,14 @@ export class BlogComponent {
       };
 
       // send new object to service to api....then refresh blog list
-      this.service.addPost(post).subscribe(response => {
-        this.getPosts();
-        this.resetForm();
+      this.service.addPost(post).subscribe({
+        next: response => {
+          this.getPosts();
+          this.resetForm();
+        },
+        error: err  => {
+          this.message = err.message;
+        }
       });
     }
     else {
@@ -74,9 +82,14 @@ export class BlogComponent {
       };
 
       // send modified object to service to api....then refresh blog list
-      this.service.updatePost(post).subscribe(response => {
+      this.service.updatePost(post).subscribe({
+        next: response => {
         this.getPosts();
         this.resetForm();
+        },
+        error: err => {
+          this.message = err.message;
+        }
       });
     }
   }
@@ -92,10 +105,21 @@ export class BlogComponent {
     if (confirm('Are you sure you want to delete this post?') == true) {
       let id = this._id || '';
 
-      this.service.deletePost(id).subscribe(response => {
-        this.getPosts();
-        this.resetForm();
-      });
+      try {
+        this.service.deletePost(id).subscribe({
+          next: response => {
+            console.log(response);
+            this.getPosts();
+            this.resetForm();
+          },
+          error: err => {
+            this.message = err.message;
+          }
+        });
+      }
+      catch (error:any) {
+        this.message = error.message;
+      } 
     } 
   }
 
@@ -103,11 +127,13 @@ export class BlogComponent {
     this._id = undefined;
     this.title = undefined;
     this.body = undefined;
-    this.username = undefined;
+    //this.username = undefined;
   }
 
   // runs every time component instantiates
   ngOnInit(): void {
+    this.currentUser = sessionStorage.getItem('username') ?? undefined;
+    this.username = this.currentUser;
     this.getPosts();
   }
 }

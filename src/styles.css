@@ -15,6 +15,14 @@ fieldset {
   }
   
   label {
-    width: 85px;
+    width: 145px;
     vertical-align: top;
   }
+
+  .navbar-dark {
+    background-color: #a50044;
+}
+
+.nav-link {
+  cursor: pointer;
+}

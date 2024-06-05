@@ -1,0 +1,13 @@
+<section class="container">
+   <h1>Login</h1>
+   <p class="alert alert-danger" *ngIf="message">{{message}}</p>
+    <fieldset>
+        <label for="username">Username:</label>
+        <input name="username" id="username" required [(ngModel)]="username" />
+    </fieldset>
+    <fieldset>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required [(ngModel)]="password" />
+    </fieldset>
+    <button (click)="login()" class="btn btn-info offset-2"><i class="bi bi-person-lock"></i> Login</button> 
+</section>

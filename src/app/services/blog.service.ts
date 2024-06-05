@@ -20,17 +20,17 @@ export class BlogService {
 
   // CREATE using POST
   addPost(post: any) {
-    return this.http.post(`${this.serverUrl}/api/posts`, post);
+    return this.http.post(`${this.serverUrl}/api/posts`, post, { withCredentials: true});
   }
 
   // DELETE
   deletePost(_id: string) {
-    return this.http.delete(`${this.serverUrl}/api/posts/${_id}`);
+    return this.http.delete(`${this.serverUrl}/api/posts/${_id}`, { withCredentials: true });
   }
 
   // UPDATE using PUT
   updatePost(post: any) {
-    return this.http.put(`${this.serverUrl}/api/posts/${post._id}`, post);
+    return this.http.put(`${this.serverUrl}/api/posts/${post._id}`, post, { withCredentials: true });
   }
 
 }
